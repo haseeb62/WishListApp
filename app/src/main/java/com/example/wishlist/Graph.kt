@@ -3,8 +3,6 @@ package com.example.wishlist
 
 import android.content.Context
 import androidx.room.Room
-import com.example.wishlist.data.Wish
-import com.example.wishlist.data.WishDao
 import com.example.wishlist.data.WishDatabase
 import com.example.wishlist.data.WishRepository
 
