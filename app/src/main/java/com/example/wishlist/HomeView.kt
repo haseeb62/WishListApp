@@ -26,11 +26,12 @@ import com.example.wishlist.data.Wish
 
 @Composable
 fun HomeView(modifier: Modifier = Modifier, navController: NavController, viewModel: WishViewModel){
+
     Scaffold(
         topBar = { AppBarView(title = "WishList") },
         floatingActionButton = {
             FloatingActionButton(onClick = {
-                navController.navigate(Screen.AddScreen.route)
+                navController.navigate(Screen.AddScreen.route + "/0L")
 
             },
                 contentColor = Color.White,
@@ -40,12 +41,16 @@ fun HomeView(modifier: Modifier = Modifier, navController: NavController, viewMo
             }
         }
     ) {
+
+
         val wishList = viewModel.getAllWishes.collectAsState(initial = listOf())
         LazyColumn(modifier = modifier
             .fillMaxSize()
             .padding(it)) {
             items(wishList.value){
                 WishItem(wish = it) {
+                    val id = it.id
+                    navController.navigate(Screen.AddScreen.route + "/$id")
                     
                 }
             }

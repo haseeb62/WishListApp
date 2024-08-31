@@ -15,6 +15,7 @@ import androidx.compose.material3.OutlinedTextField
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -37,6 +38,16 @@ fun addEditViewDetailView(
     viewModel : WishViewModel = WishViewModel(),
     navController: NavController = rememberNavController()
 ){
+
+    if (id != 0L){
+        val wish = viewModel.getAWishById(id).collectAsState(initial =  Wish())
+        viewModel.wishTitleState = wish.value.title
+        viewModel.wishDescriptionState = wish.value.description
+    }
+    else{
+        viewModel.wishTitleState = ""
+        viewModel.wishDescriptionState = ""
+    }
     val snackMessage = remember {
         mutableStateOf("")
     }
